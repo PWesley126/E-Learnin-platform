@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Course Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1 id="course-title">Course Title</h1>
+    <a href="index.html" class="back-link">← Back to Courses</a>
+  </header>
+
+  <main class="course-detail">
+    <video id="course-video" controls>
+      <source src="assets/sample.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <p id="course-description">Course description goes here.</p>
+  </main>
+
+  <script>
+    const courseData = {
+      'HTML & CSS Basics': {
+        title: 'HTML & CSS Basics',
+        video: 'assets/sample.mp4',
+        description: 'This course introduces the building blocks of the web: HTML for structure and CSS for style.'
+      },
+      'JavaScript Essentials': {
+        title: 'JavaScript Essentials',
+        video: 'assets/sample.mp4',
+        description: 'Learn core JavaScript concepts like variables, loops, functions, and DOM manipulation.'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const courseName = params.get('course');
+    const data = courseData[courseName];
+
+    if (data) {
+      document.getElementById('course-title').textContent = data.title;
+      document.getElementById('course-video').querySelector('source').src = data.video;
+      document.getElementById('course-video').load(); // reload video
+      document.getElementById('course-description').textContent = data.description;
+    }
+  </script>
+</body>
+</html>
